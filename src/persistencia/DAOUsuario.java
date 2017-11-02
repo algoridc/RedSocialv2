@@ -11,6 +11,8 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 
 import auxiliares.Utilidades;
+import persistencia.DAOUsuario;
+import persistencia.MongoBroker;
 import modelo.Usuario;
 
 @Component
@@ -176,7 +178,74 @@ public static void update (Usuario usuario) throws Exception {
 	
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**Usuario select(Usuario user)
+ * @param user
+ * @return
+ * Este metodo selecciona en funcion del mail
+ */
+public static Usuario selectAlberto(Usuario user) {
+	
+	Usuario result=null;
+	MongoBroker broker = MongoBroker.get();
+	MongoCollection<Document> usuarios=broker.getCollection("Usuarios");
+	Document criterio=new Document();
+	criterio.append("email", user.getemail());
+	
+	FindIterable<Document> resultado=usuarios.find(criterio);
+	Document usuario=resultado.first();
 
+	if (usuario!=null) {
+		result = new Usuario (usuario.getString("nombre"), usuario.getString("email"), usuario.getString("pwd"));
+	}
+	
+	return result;
+	
+}
+public static Usuario insertAlberto(Usuario usuario) {
+	
+	Document bso=new Document();
+	
+	bso.put("nombre", usuario.getNombre());
+	bso.append("pwd", usuario.getPwd());
+	bso.append("email", usuario.getemail());
+	
+	MongoBroker broker= MongoBroker.get();
+	MongoCollection<Document>usuarios=broker.getCollection("Usuarios");
+	usuarios.insertOne(bso);
+	
+	return DAOUsuario.selectAlberto(usuario);
+	
+}
+/**boolean update(Usuario useuario)
+ * @param usuario
+ * @return
+ * Este metodo actualiza en funcion del mail
+ */	
+
+public static boolean updateAlberto(Usuario usuario) {
+	return deleteAlberto(usuario) && insertAlberto(usuario)!=null;
+}
+/**boolean delete(Usuario useuario)
+ * @param usuario
+ * @return
+ * Este metodo elimina en funcion del mail
+ */
+public static boolean deleteAlberto(Usuario usuario) {
+	try {
+		Document bso=new Document();
+		bso.append("email", usuario.getemail());
+	
+		MongoBroker broker= MongoBroker.get();
+		MongoCollection<Document>usuarios=broker.getCollection("Usuarios");
+		usuarios.deleteOne(bso);
+		return true;
+	
+	}catch(Exception e) {
+		return false;
+	}
+	
+}
 
 
 }

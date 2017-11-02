@@ -1,5 +1,7 @@
 package modelo;
 
+import persistencia.DAOUsuario;
+
 public class Usuario {
 	private String idUsuario;
 	private String nombre;
@@ -61,6 +63,21 @@ public class Usuario {
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
+	//Metodos DAO//////////////////////////////////////////////////////////
+		public Usuario select() {
+			return DAOUsuario.selectAlberto(this);
+		}
+		public Usuario insert() {
+			return DAOUsuario.insertAlberto(this);
+			
+		}
+		public boolean update() {
+			return DAOUsuario.updateAlberto(this);
+		}
+		public boolean delete() {
+			return DAOUsuario.deleteAlberto(this);
+			
+		}
 
 	@Override
 	public String toString() {

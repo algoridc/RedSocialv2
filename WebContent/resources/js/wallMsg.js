@@ -5,24 +5,8 @@ $( document ).ready(function() {
 		
 		var _status = sessionStorage.getItem("status"); 
 		
-		if(_status != "ok"){
-			
-			alert("No ha iniciado sesion");
-			location.href ="index.html";
-		}
-		
-		document.getElementById("menuNombre").innerHTML = _emisor;
-		document.getElementById("infoUser").innerHTML = "Bienvenido "+_emisor+"!!";
 		
 	});
-	$('#logOut').click(function(){
-		//borro la sesion
-		sessionStorage.clear();
-		//vuelvo al inicio
-		location.href ="index.html";
-		
-	});
-	
 	
 		
 	$('#sendForm').on('click', function(e){

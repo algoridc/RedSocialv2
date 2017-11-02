@@ -9,6 +9,7 @@
 <script type="text/javascript" src="resources/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="resources/js/walladmin.js"></script>
+<script type="text/javascript" src="resources/js/wall.js"></script>
 </head>
 <body>
 	<div class="container-fluid">
@@ -35,9 +36,9 @@
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown"> Menú <b class="caret"></b></a>
 						<ul class="dropdown-menu">
-							<li><a href="#" id=menuNombre>Usuario</a></li>
+							<li><a href="#" id="menuNombre">Usuario</a></li>
 							<li class="divider"></li>
-							<li><a href="#">Configuración</a></li>
+							<li><a href="#" id="menuConfiguracion">Configuración</a></li>
 							<li><a href="#">Ayuda</a></li>
 							<li><a href="#">Acerca de...</a></li>
 							<li class="divider"></li>
